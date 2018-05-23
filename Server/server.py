@@ -5,6 +5,12 @@ from flask import Flask
 from flask import request
 from werkzeug.exceptions import BadRequestKeyError
 
+# gevent
+from gevent import monkey
+from gevent.pywsgi import WSGIServer
+monkey.patch_all()
+# gevent end
+
 """影视推荐系统后台"""
 
 app = Flask(__name__)
@@ -244,4 +250,6 @@ def api_get_movie_id_list():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    # app.run(host='0.0.0.0')
+    http_server = WSGIServer(('0.0.0.0', 5000), app)
+    http_server.serve_forever()
