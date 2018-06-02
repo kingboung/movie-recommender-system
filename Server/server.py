@@ -101,7 +101,7 @@ def api_get_user_info():
         recommend_info = get_recommend_info(user_id)
 
         # mongo能够找到该id的用户信息
-        if user_info.count() and recommend_info.count():
+        if user_info and recommend_info and user_info.count() and recommend_info.count():
             return json.dumps({
                 'Response': {
                     'Info': user_info[0],
@@ -162,7 +162,7 @@ def api_get_movie_info():
         movie_info = get_movie_info(movie_id)
 
         # mongo能够找到该id的电影信息
-        if movie_info.count():
+        if movie_info and movie_info.count():
             return json.dumps({
                 'Response': {
                     'Info': movie_info[0],
